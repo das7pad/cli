@@ -16,6 +16,12 @@
 
   process.title = 'npm'
 
+  if (process.env.NPM_FORCE_SHA512) {
+    require('crypto').getHashes = function () {
+      return ['sha512']
+    }
+  }
+
   var unsupported = require('../lib/utils/unsupported.js')
   unsupported.checkForBrokenNode()
 
